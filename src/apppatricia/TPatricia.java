@@ -1,17 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apppatricia;
 
-/**
- *
- * @author Gomes
- */
 public class TPatricia {
     private No raiz;
-
 
     public TPatricia() 
     {
@@ -22,96 +12,79 @@ public class TPatricia {
         return raiz;
     }
     
-    public No NoIdeal(String info, int index){
-        int indexInfo = 0, indexPatricia = 1 ;
-        No auxPatricia = this.raiz; 
-        char letraInfo;
-        char letraPatricia;
-        
-        while(auxPatricia != null)
-        {            
-            letraInfo = info.charAt(indexInfo);
-            letraPatricia = auxPatricia.getInfo().charAt(indexPatricia);
-            
-            if(letraPatricia != '\0' && letraInfo  == letraPatricia)
-            {
-                indexInfo++;
-                indexPatricia++;
-            }
-            else
-            {
-                
-            }
-        }
-        
-        return null;
-    }
     
     public void Inserir(String info)
     {
-        
+        info = info.toLowerCase();
         No aux;
         
         if(this.raiz == null)
             this.raiz = new No(info.toLowerCase());
         else
         {
-            char letra = info.charAt(0);
-            
-            
-            
-        }
-        /*
-        No aux, pai;
-        int i = 0, pos;
-        if(raiz == null)
-        {
-            aux = new No(info.charAt(0));
-            raiz = 4;
-            for(i=1; i<info.length(); i++)
-            {
-                aux.setVlig((int)info.charAt(i-1)-97, new No(info.charAt(i)));
-                aux.setTll(aux.getTll()+1);
-                aux = aux.getVlig((int)info.charAt(i-1)-97);
-            }
-            aux.setVlig((int)info.charAt(i-1)-97, new No());
-            aux = aux.getVlig((int)info.charAt(i-1)-97);
-            aux.setPalavra(info);
-        }
-        else
-        {
-            aux = raiz; pai = raiz;
-            i=0;
-            while(i<info.length()&&aux!=null)
-            {
-                pai = aux;
-                aux = aux.getVlig((int)info.charAt(i)-97);
-                i++;
-            }
-            if(i<info.length()&&aux == null)
-            {
-                pai.setVlig((int)info.charAt(i-1)-97, new No(info.charAt(i)));
-                aux = pai.getVlig((int)info.charAt(i-1)-97);
-                for(;i<info.length();i++)
+            No auxPatricia = this.raiz; 
+            No auxCompara = null;
+            int j=0, i;
+            //Andar entre No
+            while(auxPatricia != null)
+            {   
+                boolean continuar = true;
+                for(i=1; i<info.length() && continuar; i++)
+                    continuar = auxPatricia.getInfo().equals(info.substring(j, i));
+                j=i;
+
+                if(i < info.length()) 
                 {
-                    aux.setVlig((int)info.charAt(i)-97, new No(info.charAt(i)));
-                    aux.setTll(aux.getTll()+1);
-                    aux = aux.getVlig((int)info.charAt(i)-97);
+                    int posVlig=0;
+                    for(posVlig=0; posVlig < auxPatricia.getTl(); posVlig++)
+                    {
+                        auxCompara = auxPatricia.vLigPosicao(posVlig);
+                        char letraPatricia = auxCompara.getInfo().charAt(0);
+                        if(letraPatricia == auxPatricia.getInfo().charAt(j))
+                        {
+                            auxPatricia = auxCompara;
+                        }
+                    }
+
+                    if(posVlig == auxPatricia.getTl())
+                    {
+                        char letraInfo;
+                        char letraPatricia;
+                        boolean diferente = true;
+                        for(int index=0; index < info.length() && diferente; index++)
+                        {
+                            letraInfo = info.charAt(index);
+                            letraPatricia = auxCompara.getInfo().charAt(index);
+                            if(letraInfo != letraPatricia){
+                                diferente=false;
+                                No pos_insere = auxCompara.quebraPalavra(index);
+                                pos_insere.setInfo(info.substring(j,i));
+                            }
+                        }
+
+                    }
                 }
-                aux.setVlig((int)info.charAt(i-1)-97, new No());
-                aux = aux.getVlig((int)info.charAt(i-1)-97);
-                aux.setPalavra(info);
             }
-            else
-                if(i==info.length()&&aux != null)
-                    aux.setPalavra(info);
+        
+            
+            
+        }
+        
+        public void exibePalavras(No no, String palavra)
+        {
+            if(no != null)
+            {
+                if(no.getTl() == 0)
+                    {
+                       palavra = palavra+no.getInfo();
+                        System.out.println(palavra);
+                    }
                 else
-                   if(i==info.length()&&aux == null)
-                   {
-                       pai.setVlig((int)info.charAt(i-1)-97, new No());
-                       aux = pai.getVlig((int)info.charAt(i-1)-97);
-                       aux.setPalavra(info);
-                   }
-        }*/
-    }
+                    for(int i=0;i<no.getTl();i++)
+                    {
+                        if(no.vLigPosicao(i) != null)
+                            exibePalavras(no.vLigPosicao(i),palavra+no.getInfo());
+                    }
+            }
+        }
 }

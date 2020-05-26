@@ -29,8 +29,8 @@ public class No {
         info = null;
     }
 
-    public No getVlig(int pos) {
-        return vlig[pos];
+    public No [] getVlig() {
+        return vlig;
     }
 
     public void setVlig(int pos, No no) {
@@ -46,14 +46,30 @@ public class No {
     }
 
 
-    public int getTll() {
+    public int getTl() {
         return tl;
     }
 
-    public void setTll(int tl) {
+    public void setTl(int tl) {
         this.tl = tl;
     }    
+
+    public No vLigPosicao(int pos)
+    {
+        return this.vlig[pos];
+    }
     public String exibir(){
         return this.getInfo();
+    }
+    public No quebraPalavra(int index){
+        
+        String sub = this.info.substring(index, this.info.length());
+        this.info.replace(sub, "");
+        
+        this.setVlig(this.getTl(),new No (sub));
+        this.tl++;
+        this.setVlig(this.getTl(),new No ());
+        
+        return this.vLigPosicao(tl);
     }
 }

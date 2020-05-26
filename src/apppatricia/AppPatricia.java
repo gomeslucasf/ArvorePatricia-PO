@@ -15,20 +15,17 @@ public class AppPatricia {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TPatricia t = new TPatricia();
-        t.Inserir("acta");
-        t.Inserir("acto");
-        t.Inserir("actor");
-        t.Inserir("ala");
-        t.Inserir("galo");
-        t.Inserir("gel");
-        t.Inserir("sol");
-        t.Inserir("sola");
-        t.Inserir("solo");
-       /* t.exibe(t.getRaiz());
-        t.remove("galo");
-        System.out.println("\n\n");
-        t.exibe(t.getRaiz());*/
+        TPatricia tPatricia = new TPatricia();
+        tPatricia.Inserir("bear");
+        tPatricia.Inserir("Bell");
+        tPatricia.Inserir("bid");
+        tPatricia.Inserir("Bull");
+        tPatricia.Inserir("buy");
+        tPatricia.Inserir("sell");
+        tPatricia.Inserir("stock");
+        tPatricia.Inserir("stop");
+        tPatricia.exibePalavras(tPatricia.getRaiz(),"");
+       
     }
     
 }
