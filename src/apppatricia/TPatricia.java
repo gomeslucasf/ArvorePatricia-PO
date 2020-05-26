@@ -66,25 +66,24 @@ public class TPatricia {
                 }
             }
         
-            
-            
-        }
+        }       
+    }
         
-        public void exibePalavras(No no, String palavra)
+    public void exibePalavras(No no, String palavra)
+    {
+        if(no != null)
         {
-            if(no != null)
-            {
-                if(no.getTl() == 0)
-                    {
-                       palavra = palavra+no.getInfo();
-                        System.out.println(palavra);
-                    }
-                else
-                    for(int i=0;i<no.getTl();i++)
-                    {
-                        if(no.vLigPosicao(i) != null)
-                            exibePalavras(no.vLigPosicao(i),palavra+no.getInfo());
-                    }
-            }
+            if(no.getTl() == 0)
+                {
+                   palavra = palavra+no.getInfo();
+                    System.out.println(palavra);
+                }
+            else
+                for(int i=0;i<no.getTl();i++)
+                {
+                    if(no.vLigPosicao(i) != null)
+                        exibePalavras(no.vLigPosicao(i),palavra+no.getInfo());
+                }
         }
+    }
 }
